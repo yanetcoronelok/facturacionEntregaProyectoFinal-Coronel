@@ -2,6 +2,7 @@ package dev.yanetcoronel.coderhouse_entrega.controller;
 
 import dev.yanetcoronel.coderhouse_entrega.model.Cliente;
 import dev.yanetcoronel.coderhouse_entrega.service.ClienteService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class ClienteController {
     }
 
     @PostMapping
-    public Cliente create(@RequestBody Cliente cliente) {
+    public Cliente create(@RequestBody @Valid Cliente cliente) {
         return clienteService.crearCliente(cliente);
     }
 

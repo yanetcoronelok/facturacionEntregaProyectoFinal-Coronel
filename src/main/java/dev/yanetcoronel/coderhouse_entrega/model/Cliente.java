@@ -1,6 +1,9 @@
 package dev.yanetcoronel.coderhouse_entrega.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "clientes")
@@ -10,8 +13,10 @@ public class Cliente {
     private Long id;
     private String nombre;
     private String apellido;
+    @Email
     private String email;
     private String direccion;
+    @NotNull
     private Integer dni;
 
     public Cliente() {
