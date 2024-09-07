@@ -3,6 +3,7 @@ package dev.yanetcoronel.coderhouse_entrega.controller;
 import dev.yanetcoronel.coderhouse_entrega.dto.VentaDto;
 import dev.yanetcoronel.coderhouse_entrega.model.Venta;
 import dev.yanetcoronel.coderhouse_entrega.service.VentaService;
+import jakarta.validation.Valid;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class VentaController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> crearVenta(@RequestBody VentaDto ventaRequest) {
+    public ResponseEntity<Object> crearVenta(@RequestBody @Valid VentaDto ventaRequest) {
         try {
             return ResponseEntity.ok(this.ventaService.agregarVenta(ventaRequest));
         }catch (BadRequestException e){
