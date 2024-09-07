@@ -13,8 +13,8 @@ public class Venta {
     private Long id;
     @ManyToOne
     private Cliente cliente;
-    @OneToMany
-    private List<VentaProducto> ventaProductos;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<VentaProducto> items;
 
     public Venta() {
     }
@@ -35,11 +35,11 @@ public class Venta {
         this.cliente = cliente;
     }
 
-    public List<VentaProducto> getVentaProductos() {
-        return new ArrayList<>(ventaProductos);
+    public List<VentaProducto> getItems() {
+        return new ArrayList<>(items);
     }
 
-    public void setVentaProductos(List<VentaProducto> ventaProductos) {
-        this.ventaProductos = ventaProductos;
+    public void setItems(List<VentaProducto> ventaProductos) {
+        this.items = ventaProductos;
     }
 }

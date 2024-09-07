@@ -2,6 +2,7 @@ package dev.yanetcoronel.coderhouse_entrega.service;
 
 import dev.yanetcoronel.coderhouse_entrega.model.Producto;
 
+import dev.yanetcoronel.coderhouse_entrega.model.VentaProducto;
 import dev.yanetcoronel.coderhouse_entrega.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +31,16 @@ public class ProductoService {
 
     public void borrarProducto(Long id) {
         productoRepository.deleteById(id);
+    }
+
+    public void reducirStocks(List<VentaProducto> items) {
+        for (VentaProducto item : items) {
+            Producto producto = item.getProducto();
+            Long stockAnterior = producto.getStock();
+
+            producto.setStock(stockAnterior - item.getCantidad());
+
+            productoRepository.save(producto);
+        }
     }
 }

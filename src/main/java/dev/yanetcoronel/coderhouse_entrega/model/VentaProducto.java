@@ -1,5 +1,6 @@
 package dev.yanetcoronel.coderhouse_entrega.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,6 +11,7 @@ public class VentaProducto {
 
     @ManyToOne
     @JoinColumn(name = "venta_id")
+    @JsonBackReference
     private Venta venta;
 
     @ManyToOne
@@ -17,6 +19,15 @@ public class VentaProducto {
     private Producto producto;
 
     private Integer cantidad;
+
+    public VentaProducto() {
+    }
+
+    public VentaProducto(Venta venta, Producto producto, Integer cantidad) {
+        this.venta = venta;
+        this.producto = producto;
+        this.cantidad = cantidad;
+    }
 
     public Venta getVenta() {
         return venta;
