@@ -4,10 +4,12 @@ import dev.yanetcoronel.coderhouse_entrega.dto.VentaDto;
 import dev.yanetcoronel.coderhouse_entrega.model.Venta;
 import dev.yanetcoronel.coderhouse_entrega.service.VentaService;
 import org.apache.coyote.BadRequestException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/ventas")
@@ -20,8 +22,14 @@ public class VentaController {
     }
 
     @PostMapping
-    public Venta crearVenta(@RequestBody VentaDto ventaRequest) throws BadRequestException {
-        return this.ventaService.agregarVenta(ventaRequest);
+    public ResponseEntity<Object> crearVenta(@RequestBody VentaDto ventaRequest) {
+        try {
+            return ResponseEntity.ok(this.ventaService.agregarVenta(ventaRequest));
+        }catch (BadRequestException e){
+            Map<String, String> error = Map.ofEntries(Map.entry("error", e.getMessage()));
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+        }
+
     }
 
     @GetMapping
